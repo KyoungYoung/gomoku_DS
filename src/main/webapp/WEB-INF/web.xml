@@ -8,4 +8,14 @@
         <param-name>CHAT_ADDR</param-name>
         <param-value>ws://localhost:8080/</param-value>
     </context-param>
+    <servlet>
+        <servlet-name>JspServlet</servlet-name>
+        <jsp-file>/room-create.jsp</jsp-file>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>JspServlet</servlet-name>
+        <url-pattern>/room-create</url-pattern>
+    </servlet-mapping>
+
+
 </web-app>
