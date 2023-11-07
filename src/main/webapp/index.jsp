@@ -8,7 +8,6 @@
 <h1>테스트 메인페이지
 </h1>
 <br/>
-<a href="/room-create">게임 들어가기</a>
 <a href="room-nickname.jsp">닉네임 입력</a>
 </body>
 </html>
