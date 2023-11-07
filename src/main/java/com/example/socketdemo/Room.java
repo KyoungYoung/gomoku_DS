@@ -1,10 +1,15 @@
 package com.example.socketdemo;
 
 
+import javax.websocket.Session;
+import java.util.HashSet;
+import java.util.Set;
+
 // 방 정보를 나타내는 클래스 - 방 번호, 이름 등 다른 정보들 포함
 public class Room {
     private String name;
     private int capacity;
+    private Set<Session> users;
     // 다른 방 정보 필드들을 추가할 수 있습니다.
 
     public Room(String roomTitle, String userNickname) {
@@ -14,6 +19,18 @@ public class Room {
     public Room(String name, int capacity) {
         this.name = name;
         this.capacity = capacity;
+        this.users = new HashSet<>();
+    }
+    public boolean isAvailable() {
+        return users.size() < capacity;
+    }
+
+    public void addUser(Session session) {
+        users.add(session);
+    }
+
+    public void removeUser(Session session) {
+        users.remove(session);
     }
 
     public String getName() {
