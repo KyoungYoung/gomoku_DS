@@ -86,7 +86,7 @@
 
     // 게임 보드 요소에 대한 참조를 가져오고 서버와의 WebSocket 연결을 설정합니다.
     const board = document.getElementById("omok-board");
-    const socket = new WebSocket("<%= application.getInitParameter("CHAT_ADDR")%>gomoku/roomName/userNickname");
+    const socket = new WebSocket("<%= application.getInitParameter("CHAT_ADDR")%>gomoku/${param.roomName}/${param.chatId}");
     console.log(socket);
     let currentPlayer = "O";
     let nowTurn = "O";
@@ -267,7 +267,7 @@
         console.error("WebSocket 생성에 실패했습니다.");
         alert("방이 꽉차부렀으");
         // chatWindow.innerHTML += "웹소켓 서버가 연결종료되었습니다. ";
-        window.location.href = "index.jsp";
+        window.location.href = "room-list.jsp";
     }
 
     socket.onerror = (event) => {
