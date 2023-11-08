@@ -148,6 +148,15 @@
                     if (xhr.responseText === "victory") {
                         // 게임에서 승리했다면 사용자에게 알림 표시
                         alert("게임에서 승리했습니다!");
+
+                        const eventData = {
+                            event: "end",
+                            row: row,
+                            col: col,
+                            stone: stone
+                        }
+                        const eventDataStr = JSON.stringify(eventData);
+                        socket.send(eventDataStr);
                         gameEnded = true;
                     }
                 }
@@ -171,6 +180,11 @@
     socket.onmessage = function (event) {
 
         const eventData = JSON.parse(event.data);
+        if(eventData.event === "end"){
+
+            alert("게임에서 패배했습니다!");
+            gameEnded = true;
+        }
 
         // 서버에서 받은 돌 놓기 이벤트를 처리합니다.
         if (eventData.event === "place_stone") {
