@@ -3,6 +3,7 @@
 <%@ page import="java.util.List" %>
 <%@ page import="com.example.socketdemo.Room" %>
 
+
 <html>
 <head>
   <title>방 리스트</title>
@@ -81,7 +82,7 @@
   }
 
   function goToRoom(){
-    let popupWindow = window.open("/room-create","_blank","width=1000, height=500");
+    let popupWindow = window.open("room-create.jsp","_blank","width=1000, height=500");
     setTimeout(()=>{
       if (popupWindow) {
         popupWindow.close()

@@ -100,8 +100,8 @@
             board.appendChild(cell);
         }
     }
-        let gameEnded = false;
 
+    let gameEnded = false;
     document.addEventListener("DOMContentLoaded", function () {
         // 게임 보드의 모든 셀에 대한 참조를 가져오고 초기 게임 변수를 설정합니다.
         const cellLinks = document.querySelectorAll(".omok-cell");
@@ -216,7 +216,7 @@
             const sender = eventData.chatId;
             const content = eventData.content;
 
-            if (content != "") {
+            if (content && content.match("/")) {
                 if (content.match("/")) {
                     if (content.match(("/" + chatId))) {
                         let temp = content.replace(("/" + chatId), " [귓속말] : ");
@@ -281,11 +281,11 @@
         console.error("WebSocket 생성에 실패했습니다.");
         alert("방이 꽉차부렀으");
         // chatWindow.innerHTML += "웹소켓 서버가 연결종료되었습니다. ";
-        window.location.href = "room-list.jsp";
+        window.location.href = "room-list.jsp?chatId=" + encodeURIComponent(chatId);
     }
 
     socket.onerror = (event) => {
-        alert(event.data);
+        window.location.href = "room-list.jsp?chatId=" + encodeURIComponent(chatId);
         chatWindow.innerHTML += "채팅 중 에러가 발생하였습니다.";
 
     }
