@@ -3,6 +3,8 @@
 <%@ page import="java.util.List" %>
 <%@ page import="com.example.socketdemo.Room" %>
 
+
+
 <html>
 <head>
   <title>방 리스트</title>
@@ -12,6 +14,12 @@
 <%
   List<Room> rooms = (List<Room>) request.getAttribute("rooms");
   String userNickname = (String) session.getAttribute("userNickname");
+  // 닉네임이 세션에 이미 설정되어 있지 않은 경우에만 설정
+  if (userNickname == null || userNickname.isEmpty()) {
+
+    userNickname = request.getParameter("userNickname");
+    session.setAttribute("userNickname", userNickname);
+  }
 %>
 
 <p>사용자 닉네임: <%= userNickname %></p>
