@@ -33,7 +33,7 @@ public class OmokServer {
 
             System.out.println(userNickname + "님 방에 입장: " + roomName);
             System.out.println("session id: " + session.getId());
-            System.out.println(userNickname + "님의 오목 : " + firstPlayer + "순서 : "+ clients.size());
+            System.out.println(userNickname + "님의 오목 : " + firstPlayer + "  순서 : "+ clients.size());
         } else {
             System.out.println("방이 가득 참");
             session.close();

@@ -1,52 +1,45 @@
 package websocket;
 
-import javax.websocket.OnClose;
-import javax.websocket.OnError;
-import javax.websocket.OnMessage;
-import javax.websocket.OnOpen;
-import javax.websocket.Session;
+import com.example.socketdemo.Room;
+import com.example.socketdemo.RoomManager;
+
+import javax.websocket.*;
 import javax.websocket.server.ServerEndpoint;
 import java.io.IOException;
-import java.util.HashSet;
-import java.util.Set;
+import java.util.List;
 
-@ServerEndpoint("/roomSocket")
+@ServerEndpoint("/roomWebSocket")
 public class RoomWebSocket {
-
-    private static Set<Session> sessions = new HashSet<>();
+    private static List<Session> sessions;
 
     @OnOpen
     public void onOpen(Session session) {
-        sessions.add(session);
+        RoomManager.addSession(session);
     }
+
 
     @OnClose
     public void onClose(Session session) {
-        sessions.remove(session);
+        RoomManager.removeSession(session);
     }
 
-    @OnError
-    public void onError(Session session, Throwable error) {
-        error.printStackTrace();
-    }
-
-    @OnMessage
-    public void onMessage(String message, Session session) {
-        // 클라이언트로부터 메시지를 받음
-        broadcast(message);
-    }
-
-    private static void broadcast(String message) {
+    public static void broadcastRoomList(List<Room> rooms, List<Session> sessions) {
+        String roomListJson = createRoomListJson(rooms);
         for (Session session : sessions) {
-            if (session.isOpen()) {
-                try {
-                    // 모든 클라이언트에게 메시지 전송
-                    session.getBasicRemote().sendText(message);
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
+            try {
+                session.getBasicRemote().sendText(roomListJson);
+            } catch (IOException e) {
+                e.printStackTrace();
             }
         }
     }
-}
+    private static String createRoomListJson(List<Room> rooms) {
+        // TODO: Room 정보를 JSON으로 변환하는 로직 추가
+        return "JSON representation of room list";
+    }
 
+    public static void setSessions(List<Session> sessions) {
+        RoomWebSocket.sessions = sessions;
+    }
+
+}

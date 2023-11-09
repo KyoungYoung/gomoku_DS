@@ -100,12 +100,12 @@
             board.appendChild(cell);
         }
     }
+        let gameEnded = false;
 
     document.addEventListener("DOMContentLoaded", function () {
         // 게임 보드의 모든 셀에 대한 참조를 가져오고 초기 게임 변수를 설정합니다.
         const cellLinks = document.querySelectorAll(".omok-cell");
 
-        let gameEnded = false;
 
         // 게임 보드의 각 셀에 클릭 이벤트 리스너를 추가합니다.
         cellLinks.forEach(link => {
