@@ -42,12 +42,12 @@ public class CreateRoomServlet extends HttpServlet {
             response.getWriter().write(successMessage);
             Room newRoom = new Room(roomTitle, 2);
             roomList.add(newRoom);
-            System.out.println("방이 성공적으로 생성되었습니다.");
-            if(userNickname != null && userNickname != "") {
-                String encodedChatId = URLEncoder.encode(userNickname, StandardCharsets.UTF_8);
-                String redirectURL = "room-list.jsp?chatId=" + encodedChatId;
-                response.sendRedirect(redirectURL);;
-            }
+//            if(userNickname != null && userNickname != "") {
+////                String encodedChatId = URLEncoder.encode(userNickname, StandardCharsets.UTF_8);
+////                String redirectURL = "room-list.jsp?chatId=" + encodedChatId;
+////                response.sendRedirect(redirectURL);;
+//            System.out.println("방이 성공적으로 생성되었습니다.");
+//            }
         } else {
 
             session.setAttribute("userNickname", userNickname);
