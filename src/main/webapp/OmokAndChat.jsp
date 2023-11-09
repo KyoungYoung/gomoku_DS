@@ -4,29 +4,98 @@
 <head>
     <title>오목 게임 및 채팅</title>
     <style>
-        .omok-board {
-            display: grid;
-            grid-template-columns: repeat(19, 20px);
-            grid-template-rows: repeat(19, 20px);
+        *{
+            background-color: oldlace;
+            text-align: center;
         }
-
+        #container{
+            width: 1440px;
+            height: 1024px;
+            margin: 4px auto;
+            background-color: oldlace;
+        }
+        .omok-board{
+            width: 600px;
+            margin-left: 120px;
+            margin-top: 20px;
+            display: grid;
+            grid-template-columns: repeat(19, 30px);
+            grid-template-rows: repeat(19, 30px);
+        }
         .omok-cell {
-            width: 20px;
-            height: 20px;
+            width: 30px;
+            height: 30px;
             border: 1px solid #000;
             display: flex;
             justify-content: center;
             align-items: center;
+            border: 1px solid orange;
             font-size: 18px;
             color: #000;
         }
+        .header{
+            width: 100%;
+            height: 140px;
+            margin: 0 auto;
+            text-align: center;
+            font-size: 10px;
+            color: orange;
+            font-family: 'East Sea Dokdo', sans-serif;
+        }
+
+        h1{
+            font-family: 'East Sea Dokdo', sans-serif;
+            font-size: 80px;
+            color: orange;
+        }
+        h3{
+            font-family: 'East Sea Dokdo', sans-serif;
+            font-size: 35px;
+            text-align: center;
+            color: orange;
+        }
+        #left-sidebar{
+            width: 18%;
+            height: 700px;
+            text-align: center;
+            float: left;
+            margin-top: 10px;
+        }
+        #contents{
+            width: 60%;
+            height: 700px;
+            margin-left: 0 auto;
+            border: 10px solid orange;
+            border-radius:100px;
+            background-color: oldlace;
+            float: left;
+        }
+        #right-sidebar{
+            width: 18%;
+            height: 700px;
+            text-align: center;
+            background-color: oldlace;
+            float: right;
+            margin-top: 10px;
+        }
+        #footer{
+            width: 100%;
+            height: 500px;
+
+            margin:0 auto;
+            background-color: oldlace;
+            clear: left;
+        }
 
         #chatWindow {
-            border: 1px solid darkblue;
-            width: 270px;
+            border: 5px solid orange;
+            border-radius:20px;
+            width: 1200px;
             height: 310px;
             overflow: scroll;
             padding: 7px;
+            margin:0 auto;
+
         }
 
         #chatMessage {
@@ -42,44 +111,145 @@
         }
 
         #closeBtn {
-            margin-bottom: 3px;
-            position: relative;
-            top: 2px;
-            left: -2px;
+            width: 100%;
+            height: 50%;
+            font-size:1rem;
+            font-family: 'East Sea Dokdo', sans-serif;
+            border: 1px solid orange;
+            background-color: orange;
+            text-align: center;
+            margin-top: 50%;
+            border-radius: 30px;
+
         }
 
         #chatId {
-            width: 158px;
-            height: 24px;
-            border: 1px solid darkgray;
-            background-color: whitesmoke;
+            width: 100px;
+            height: 100%;
+            border: none;
+            border-radius: 100px;
+            color:orange;
+            font-size:2rem;
+            justify-items: center;
+            justify-content: center;
+            text-align: left;
+            font-family: 'East Sea Dokdo', sans-serif;
         }
-
+        #sendbox{
+            margin:0 auto;
+            text-align: center;
+        }
         .myMsg {
             text-align: right;
+            font-size:40px;
+            color:black;
+            font-family:'Orbit', sans-serif;
         }
+        #chatMessage {
+            width: 500px;
+            height: 50px;
+            border: 2px solid orange;
+            margin:0 auto;
+        }
+        #sendBtn {
+            width: 120px;
+            height: 50px;
+            top: 2px;
+            left: -2px;
+            border: 0px solid orange;
+            color:orange;
+            font-size:40px;
+            font-family: 'East Sea Dokdo', sans-serif;
+
+
+        }
+        #playbtn{
+            margin-top: 30%;
+            width: 90px;
+            height: 50px;
+            text-align: center;
+            font-size: 1rem;
+            font-weight: 300;
+            border: 0px solid black;
+            border-radius: 100px;
+            background-image:url(img/monarch-2873979_1280.png);
+            color:white;
+            font-family: 'East Sea Dokdo', sans-serif;
+        }
+        #chatName{
+            display: flex;
+            justify-content: center;
+        }
+
+        #chatName > div:first-child{
+            display: flex;
+            margin-right: 20px;
+        }
+
     </style>
 </head>
 <body>
-<div>
-    <!-- 오목 게임 보드 -->
-    <div class="omok-board" id="omok-board">
-        <!-- 19x19 게임 보드를 생성합니다. -->
-    </div>
+<div id="header">
+    <h1>모두의 오목</h1>
 </div>
-<div>
-    <div>
-        대화명 : <input type="text" id="chatId" value="${param.chatId}" readonly />
-        <button id="closeBtn" onclick="disconnect();">채팅종료</button>
-    </div>
-    <!-- 채팅 창 -->
-    <div id="chatWindow">
-        <!-- 채팅 메시지를 표시하는 영역 -->
 
-    </div>
-    <input type="text" id="chatMessage" onkeyup="enterKey();">
-    <button id="sendBtn" onclick="sendMessage();">전송</button>
-</div>
+<div id="container">
+    <aside id="left-sidebar">
+        <img src="/img/white.png" width="150px height= 400px">
+        <h2>백돌 님</h2>
+    </aside>
+    <section id="contents">
+
+        <!-- 오목 게임 보드 -->
+        <div class="omok-board" id="omok-board">
+            <!-- 19x19 게임 보드를 생성합니다. --> </div>
+        <p> <div id="currentPlayerMessage" style="font-size: 40px"> </div></p>
+    </section>
+    <aside id="right-sidebar">
+        <img src="/img/black.png" width="150px height= 400px">
+        <h2>흑돌 님</h2>
+    </aside>
+
+    <footer id="footer">
+        <div>
+            <div id="chatName">
+                <div>
+                    <h3>유저 :  </h3>
+                    <input type="text" id="chatId" value="${param.chatId}" readonly />
+                </div>
+                <div>
+                <button id="playbtn" onclick="disconnect();">채팅종료</button>
+                </div>
+            </div>
+            <!-- 채팅 창 -->
+            <div id="chatWindow">
+                <!-- 채팅 메시지를 표시하는 영역 -->
+            </div>
+            <div id="sendbox">
+                <input type="text" id="chatMessage" onkeyup="enterKey();">
+                <button id="sendBtn" onclick="sendMessage();">전송</button>
+            </div>
+        </div>
+    </footer>
+<%--<div>--%>
+<%--    <!-- 오목 게임 보드 -->--%>
+<%--    <div class="omok-board" id="omok-board">--%>
+<%--        <!-- 19x19 게임 보드를 생성합니다. -->--%>
+<%--    </div>--%>
+<%--</div>--%>
+<%--<div>--%>
+<%--    <div>--%>
+<%--        대화명 : <input type="text" id="chatId" value="${param.chatId}" readonly />--%>
+<%--        <button id="closeBtn" onclick="disconnect();">채팅종료</button>--%>
+<%--    </div>--%>
+<%--    <!-- 채팅 창 -->--%>
+<%--    <div id="chatWindow">--%>
+<%--        <!-- 채팅 메시지를 표시하는 영역 -->--%>
+
+<%--    </div>--%>
+<%--    <input type="text" id="chatMessage" onkeyup="enterKey();">--%>
+<%--    <button id="sendBtn" onclick="sendMessage();">전송</button>--%>
+<%--</div>--%>
 <script>
 
     // 오목 게임 관련 JavaScript 코드
@@ -216,18 +386,16 @@
             const sender = eventData.chatId;
             const content = eventData.content;
 
-            if (content && content.match("/")) {
-                if (content.match("/")) {
-                    if (content.match(("/" + chatId))) {
-                        let temp = content.replace(("/" + chatId), " [귓속말] : ");
-                        chatWindow.innerHTML += "<div>" + sender + "" + temp + "</div>";
-                    }
-                } else {
-                    // 일반대화
-                    chatWindow.innerHTML += "<div>" + sender + " : " + content + "</div>";
+            if (content.match("/")) {
+                if (content.match(("/" + chatId))) {
+                    let temp = content.replace(("/" + chatId), " [귓속말] : ");
+                    // chatWindow.innerHTML += "<div>" + sender + "" + temp + "</div>";
                 }
-                chatWindow.scrollTop = chatWindow.scrollHeight;
+            } else if(!content.match("/") && content !=null) {
+                // 일반대화
+                chatWindow.innerHTML += "<div>" + sender + " : " + content + "</div>";
             }
+            chatWindow.scrollTop = chatWindow.scrollHeight;
         }
 
 
