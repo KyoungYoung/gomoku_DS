@@ -16,5 +16,6 @@
     <input type="text" id="chatId" name="userNickname" required>
     <button type="submit">게임 들어가기</button>
 </form>
+
 </body>
 </html>

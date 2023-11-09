@@ -24,6 +24,8 @@ public class CreateRoomServlet extends HttpServlet {
         String userNickname = request.getParameter("userNickname");
         // 방을 생성한 후, 방 목록을 업데이트하고 세션에 저장
         List<Room> roomList = getAvailableRooms();
+        HttpSession session = request.getSession();
+        session.setAttribute("rooms", roomList);
 
         // 방 이름이 유효한 경우에만 새로운 방을 생성
         if (roomTitle != null && !roomTitle.isEmpty()) {
@@ -34,18 +36,12 @@ public class CreateRoomServlet extends HttpServlet {
             response.setContentType("text/plain");
             response.setCharacterEncoding("UTF-8");
             response.getWriter().write(successMessage);
-
-
             Room newRoom = new Room(roomTitle, 2);
             roomList.add(newRoom);
-
-            HttpSession session = request.getSession();
-            session.setAttribute("rooms", roomList);
-
             // 방이 성공적으로 생성되면 방 목록 페이지로 리다이렉션
-            response.sendRedirect("room-list.jsp");
+            response.sendRedirect("room-list2.jsp");
         } else {
-            HttpSession session = request.getSession();
+
             session.setAttribute("userNickname", userNickname);
             session.setAttribute("rooms", roomList);
             response.sendRedirect("room-list.jsp");

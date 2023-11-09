@@ -16,12 +16,18 @@
 
 <p>사용자 닉네임: <%= userNickname %></p>
 
-<form action="/createRoom" method="POST">
-  <label for="roomTitle">방 이름:</label>
-  <input type="text" id="roomTitle" name="title" required>
-  <button type="submit">새 방 만들기</button>
-</form>
+<%--<form action="/createRoom" method="POST">--%>
+<%--  <label for="roomTitle">방 이름:</label>--%>
+<%--  <input type="text" id="roomTitle" name="title" required>--%>
+<%--  <button type="submit">새 방 만들기</button>--%>
+<%--</form>--%>
 
+<div>
+  <button onclick="goToRoom();">방만들기</button>
+</div>
+<div>
+  <button onclick="updateRoom();">새로고침</button>
+</div>
 <div id="roomList">
   <c:forEach items="${rooms}" var="room">
     <div class="room">
@@ -34,10 +40,24 @@
 </div>
 
 <script>
-  function goToRoom(roomName, userNickname) {
-    let url = `OmokAndChat.jsp?roomName=${roomName}&userNickname=${userNickname}`;
-    window.location.href = url;
+  function goToRoom() {
+    let popupWindow = window.open("/room-create", "_blank", "width=600, height=400");
+
+    // 3초뒤 닫게하기
+    // if (popupWindow) {
+    //   // 팝업이 열려있을 때만 실행
+    //   popupWindow.onload = function () {
+    //     // 팝업이 로드되면 3초 후에 부모 창을 리로드하고 팝업을 닫음
+    //     setTimeout(function () {
+    //       popupWindow.opener.location.reload();
+    //       popupWindow.close();
+    //     }, 3000);
+    //   };
+    //
+    // }
   }
+
 </script>
+
 </body>
 </html>
