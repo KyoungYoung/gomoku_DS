@@ -11,8 +11,8 @@
 <h2>방 리스트</h2>
 <%
   List<Room> rooms = (List<Room>) request.getAttribute("rooms");
-  String userNickname = (String) session.getAttribute("userNickname");
   String chatId = request.getParameter("chatId");
+  session.setAttribute("userNickname",chatId);
 
 %>
 
