@@ -7,6 +7,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
+import java.net.URLEncoder;
+import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -38,13 +40,18 @@ public class CreateRoomServlet extends HttpServlet {
             response.getWriter().write(successMessage);
             Room newRoom = new Room(roomTitle, 2);
             roomList.add(newRoom);
-            // 방이 성공적으로 생성되면 방 목록 페이지로 리다이렉션
-            response.sendRedirect("room-list2.jsp");
+            String encodedChatId = URLEncoder.encode(userNickname, StandardCharsets.UTF_8);
+            String redirectURL = "room-list.jsp?chatId=" + encodedChatId;
+            response.sendRedirect(redirectURL);;
         } else {
 
             session.setAttribute("userNickname", userNickname);
             session.setAttribute("rooms", roomList);
-            response.sendRedirect("room-list.jsp");
+
+            String encodedChatId = URLEncoder.encode(userNickname, StandardCharsets.UTF_8);
+            String redirectURL = "room-list.jsp?chatId=" + encodedChatId;
+            response.sendRedirect(redirectURL);
+
             // 방 이름이 유효하지 않을 때 에러 응답을 보냅니다.
             response.setStatus(HttpServletResponse.SC_BAD_REQUEST); // 400 Bad Request
         }

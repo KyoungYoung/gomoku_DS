@@ -3,8 +3,6 @@
 <%@ page import="java.util.List" %>
 <%@ page import="com.example.socketdemo.Room" %>
 
-
-
 <html>
 <head>
   <title>방 리스트</title>
@@ -14,15 +12,11 @@
 <%
   List<Room> rooms = (List<Room>) request.getAttribute("rooms");
   String userNickname = (String) session.getAttribute("userNickname");
-  // 닉네임이 세션에 이미 설정되어 있지 않은 경우에만 설정
-  if (userNickname == null || userNickname.isEmpty()) {
+  String chatId = request.getParameter("chatId");
 
-    userNickname = request.getParameter("userNickname");
-    session.setAttribute("userNickname", userNickname);
-  }
 %>
 
-<p>사용자 닉네임: <%= userNickname %></p>
+<p>사용자 닉네임: <%= chatId%></p>
 
 <%--<form action="/createRoom" method="POST">--%>
 <%--  <label for="roomTitle">방 이름:</label>--%>
@@ -48,24 +42,19 @@
 </div>
 
 <script>
-  function goToRoom() {
-    let popupWindow = window.open("/room-create", "_blank", "width=600, height=400");
+  function goToRoom(){
+    let popupWindow = window.open("/room-create","_blank","width=1000, height=500");
+    setTimeout(()=>{
+      if (popupWindow) {
+        popupWindow.close()
+      }
+    },5000)
+  }
 
-    // 3초뒤 닫게하기
-    // if (popupWindow) {
-    //   // 팝업이 열려있을 때만 실행
-    //   popupWindow.onload = function () {
-    //     // 팝업이 로드되면 3초 후에 부모 창을 리로드하고 팝업을 닫음
-    //     setTimeout(function () {
-    //       popupWindow.opener.location.reload();
-    //       popupWindow.close();
-    //     }, 3000);
-    //   };
-    //
-    // }
+  function updateRoom() {
+    window.location.reload();
   }
 
 </script>
-
 </body>
 </html>
