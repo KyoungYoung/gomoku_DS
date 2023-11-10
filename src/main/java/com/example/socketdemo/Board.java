@@ -1,5 +1,4 @@
-package com.example.socketdemo;
-
+package board;
 import java.util.Arrays;
 
 public class Board {
